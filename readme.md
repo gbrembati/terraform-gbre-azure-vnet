@@ -1,6 +1,6 @@
 # GBrembati Azure VNet Modules
 This Terraform project is intended to be used as module for the creation of multiple (or single) VNets with multiple (or single) subnets.
-Please refer to the indication in https://registry.terraform.io/modules/gbrembati/azure-vnet/module to learn more.
+Please look at https://registry.terraform.io/modules/gbrembati/azure-vnet/module to learn more.
 
 ## How to use it
 You would need to call the module within your main code, providing the needed variables, e.g. :
@@ -8,7 +8,7 @@ You would need to call the module within your main code, providing the needed va
 ```hcl
 module "vnet-spokes" {
   source  = "gbrembati/azure-vnet/module"
-  version = "1.2.2" 
+  version = "1.2.4" 
 
   location      = "France Central"
 
