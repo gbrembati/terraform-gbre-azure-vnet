@@ -3,15 +3,15 @@ variable "location" {
   default = "France Central"
 }
 variable "name-spokes" {
-  description = "provide cidr of spokes, e.g."
+  description = "provide names of spokes, e.g."
   default = {
     "0" = ["spoke-A","frontend","backend","application"]
     "1" = ["spoke-B","frontend","backend","application"]   
   # "2" = ["spoke-C","frontend","backend","application"] 
   } 
 }
-variable "name-spokes" {
-  description = "provide names of spokes, e.g."
+variable "cidr-spokes" {
+  description = "provide cidr of spokes, e.g."
   default = {
     "0" = ["10.0.0.0/22","10.0.0.0/24","10.0.1.0/24","10.0.2.0/24"]
     "1" = ["10.0.4.0/22","10.0.4.0/24","10.0.5.0/24","10.0.6.0/24"]
