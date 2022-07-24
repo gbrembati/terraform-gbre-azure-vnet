@@ -22,13 +22,13 @@ output "vnet-address-space" {
 
 output "subnet-A-id" {
   description = "The address space of the newly created vNet"
-  value       = azurerm_virtual_network.net-spoke-subnet-A[*].id
+  value       = azurerm_subnet.net-spoke-subnet-A[*].id
 }
 output "subnet-B-id" {
   description = "The address space of the newly created vNet"
-  value       = azurerm_virtual_network.net-spoke-subnet-B[*].id
+  value       = azurerm_subnet.net-spoke-subnet-B[*].id
 }
 output "subnet-C-id" {
   description = "The address space of the newly created vNet"
-  value       = azurerm_virtual_network.net-spoke-subnet-C[*].id
+  value       = azurerm_subnet.net-spoke-subnet-C[*].id
 }

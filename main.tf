@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "rg-vnet-spoke" {
   count = length(var.cidr-spokes)
-  name = "rg-v${var.net-spoke}-${count.index}"
+  name = "rg-vnet-${lookup(var.name-spokes, count.index)[0]}"
   location = var.location
 
   tags = {
