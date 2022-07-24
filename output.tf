@@ -32,7 +32,7 @@ output "subnet-C-id" {
   description = "The Subnet C ids"
   value       = azurerm_subnet.net-spoke-subnet-C[*].id
   precondition {
-    condition = var.subnets-per-vnet >= 3 ? length(var.cidr-spokes) : 0
+    condition = var.subnets-per-vnet >= 3 ? 1 : 0
     error_message = "not applicable for 2 or less subnets-per-vnet"
   }
 }
@@ -40,7 +40,7 @@ output "subnet-D-id" {
   description = "The Subnet D ids"
   value       = azurerm_subnet.net-spoke-subnet-D[*].id
   precondition {
-    condition = var.subnets-per-vnet == 4 ? length(var.cidr-spokes) : 0
+    condition = var.subnets-per-vnet == 4 ? 1 : 0
     error_message = "not applicable for 3 or less subnets-per-vnet"
   }
 }
