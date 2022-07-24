@@ -30,17 +30,9 @@ output "subnet-B-id" {
 }
 output "subnet-C-id" {
   description = "The Subnet C ids"
-  value       = azurerm_subnet.net-spoke-subnet-C[*].id
-  precondition {
-    condition = var.subnets-per-vnet >= 3
-    error_message = "not applicable for 2 or less subnets-per-vnet"
-  }
+  value       = var.subnets-per-vnet >= 3 ? azurerm_subnet.net-spoke-subnet-C[*].id : null
 }
 output "subnet-D-id" {
   description = "The Subnet D ids"
-  value       = azurerm_subnet.net-spoke-subnet-D[*].id
-  precondition {
-    condition = var.subnets-per-vnet == 4
-    error_message = "not applicable for 3 or less subnets-per-vnet"
-  }
+  value       = var.subnets-per-vnet >= 4 ? azurerm_subnet.net-spoke-subnet-D[*].id : null
 }
