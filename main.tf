@@ -46,9 +46,16 @@ resource "azurerm_subnet" "net-spoke-subnet-B" {
   resource_group_name   = azurerm_resource_group.rg-vnet-spoke[count.index].name
 }
 resource "azurerm_subnet" "net-spoke-subnet-C" {
-  count = length(var.cidr-spokes)
+  count = var.subnets-per-vnet >= 3 ? length(var.cidr-spokes) : 0
   name = "net-${lookup(var.name-spokes, count.index)[0]}-${lookup(var.name-spokes, count.index)[3]}"
   address_prefixes      = ["${lookup(var.cidr-spokes, count.index)[3]}"]
+  virtual_network_name  = azurerm_virtual_network.vnet-spoke[count.index].name
+  resource_group_name   = azurerm_resource_group.rg-vnet-spoke[count.index].name
+}
+resource "azurerm_subnet" "net-spoke-subnet-D" {
+  count = var.subnets-per-vnet == 4 ? length(var.cidr-spokes) : 0
+  name = "net-${lookup(var.name-spokes, count.index)[0]}-${lookup(var.name-spokes, count.index)[3]}"
+  address_prefixes      = ["${lookup(var.cidr-spokes, count.index)[4]}"]
   virtual_network_name  = azurerm_virtual_network.vnet-spoke[count.index].name
   resource_group_name   = azurerm_resource_group.rg-vnet-spoke[count.index].name
 }
@@ -85,7 +92,12 @@ resource "azurerm_subnet_route_table_association" "rt-assoc-net-subnet-B" {
   route_table_id = azurerm_route_table.rt-vnet-spoke[count.index].id
 }
 resource "azurerm_subnet_route_table_association" "rt-assoc-net-subnet-C" {
-  count = length(var.cidr-spokes)
+  count = var.subnets-per-vnet >= 3 ? length(var.cidr-spokes) : 0
   subnet_id      = azurerm_subnet.net-spoke-subnet-C[count.index].id
+  route_table_id = azurerm_route_table.rt-vnet-spoke[count.index].id
+}
+resource "azurerm_subnet_route_table_association" "rt-assoc-net-subnet-D" {
+  count = var.subnets-per-vnet == 4 ? length(var.cidr-spokes) : 0
+  subnet_id      = azurerm_subnet.net-spoke-subnet-D[count.index].id
   route_table_id = azurerm_route_table.rt-vnet-spoke[count.index].id
 }

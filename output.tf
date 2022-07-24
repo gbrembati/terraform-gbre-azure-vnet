@@ -8,7 +8,7 @@ output "resource-group-names" {
 }
 
 output "vnet-id" {
-  description = "The Name of the newly created vNet"
+  description = "The id of the newly created vNet"
   value       = azurerm_virtual_network.vnet-spoke[*].id
 }
 output "vnet-name" {
@@ -21,14 +21,26 @@ output "vnet-address-space" {
 }
 
 output "subnet-A-id" {
-  description = "The address space of the newly created vNet"
+  description = "The Subnet A ids"
   value       = azurerm_subnet.net-spoke-subnet-A[*].id
 }
 output "subnet-B-id" {
-  description = "The address space of the newly created vNet"
+  description = "The Subnet B ids"
   value       = azurerm_subnet.net-spoke-subnet-B[*].id
 }
 output "subnet-C-id" {
-  description = "The address space of the newly created vNet"
+  description = "The Subnet C ids"
   value       = azurerm_subnet.net-spoke-subnet-C[*].id
+  precondition {
+    condition = var.subnet-per-vnet >= 3 ? length(var.cidr-spokes) : 0
+    error_message = "not applicable for 2 or less subnets-per-vnet"
+  }
+}
+output "subnet-D-id" {
+  description = "The Subnet D ids"
+  value       = azurerm_subnet.net-spoke-subnet-D[*].id
+  precondition {
+    condition = var.subnet-per-vnet == 4 ? length(var.cidr-spokes) : 0
+    error_message = "not applicable for 3 or less subnets-per-vnet"
+  }
 }

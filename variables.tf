@@ -2,6 +2,11 @@ variable "location" {
   description = "Used to set deployment location"
   default = "France Central"
 }
+variable "subnets-per-vnet" {
+  description = "the number of subnet to create per each vnet (1 > num >= 4)"
+  default = 2
+}
+
 variable "name-spokes" {
   description = "provide names of spokes, e.g."
   default = {
